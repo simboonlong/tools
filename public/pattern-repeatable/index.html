@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="To quickly test if patterns can be tiled seamlessly."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Pattern repeatable</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .controls {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        padding: 8px 24px;
+        border-bottom-left-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .controls label {
+        display: block;
+        margin: 8px 0;
+        font-size: 13px;
+      }
+
+      .controls label p {
+        display: inline-block;
+      }
+
+      .controls input[type="text"] {
+        border: solid 1px #ccc;
+        padding: 0 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="w-screen h-screen">
+      <div class="controls">
+        <label for="repeat-x">
+          <p>repeat-x</p>
+          <input
+            id="repeat-x"
+            type="checkbox"
+            name="repeat-x"
+            v-model="isRepeatX"
+          />
+        </label>
+        <label for="repeat-y">
+          <p>repeat-y</p>
+          <input
+            id="repeat-y"
+            type="checkbox"
+            name="repeat-y"
+            v-model="isRepeatY"
+          />
+        </label>
+        <label for="background-position-x">
+          <p>background-position-x (%)</p>
+          <input
+            id="background-position-x"
+            type="range"
+            min="0"
+            :max="100"
+            step="1"
+            :value="backgroundPositionX"
+            name="background-position-x"
+            @input="updateBackgroundPositionX($event)"
+          />
+        </label>
+        <label for="background-position-y">
+          <p>background-position-y (%)</p>
+          <input
+            id="background-position-y"
+            type="range"
+            min="0"
+            :max="100"
+            step="1"
+            :value="backgroundPositionY"
+            name="background-position-y"
+            @input="updateBackgroundPositionY($event)"
+          />
+        </label>
+        <label for="background-size-w">
+          <p>background-size (width in px)</p>
+          <input
+            id="background-size-w"
+            type="text"
+            placeholder="auto"
+            name="background-size-w"
+            v-model="backgroundSizeW"
+          />
+        </label>
+        <label for="background-size-h">
+          <p>background-size (height in px)</p>
+          <input
+            id="background-size-h"
+            type="text"
+            placeholder="auto"
+            name="background-size-h"
+            v-model="backgroundSizeH"
+          />
+        </label>
+        <label for="file">
+          <input
+            id="file"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            @change="setBackgroundImage()"
+          />
+        </label>
+      </div>
+      <div class="w-full h-full" :style="setBackground"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            isRepeatX: true,
+            isRepeatY: true,
+            backgroundImage: 'url("./bg-tile.jpg")',
+            backgroundPositionX: 0,
+            backgroundPositionY: 0,
+            backgroundSizeW: "auto",
+            backgroundSizeH: "auto",
+          };
+        },
+        computed: {
+          setBackground: function () {
+            let backgroundSizeW = Number.isInteger(
+              parseInt(this.backgroundSizeW),
+            )
+              ? this.backgroundSizeW + "px"
+              : this.backgroundSizeW;
+            let backgroundSizeH = Number.isInteger(
+              parseInt(this.backgroundSizeH),
+            )
+              ? this.backgroundSizeH + "px"
+              : this.backgroundSizeH;
+
+            return {
+              backgroundImage: this.backgroundImage,
+              backgroundRepeat: this.setBackgroundRepeat(),
+              backgroundPositionX: this.backgroundPositionX + "%",
+              backgroundPositionY: this.backgroundPositionY + "%",
+              backgroundSize: backgroundSizeW + " " + backgroundSizeH,
+            };
+          },
+        },
+        watch: {},
+        created() {},
+        updated() {},
+        mounted() {},
+        methods: {
+          setBackgroundImage() {
+            let file = document.getElementById("file").files[0];
+            let reader = new FileReader();
+
+            reader.onloadend = () => {
+              this.backgroundImage = 'url("' + reader.result + '")';
+            };
+
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+          },
+          setBackgroundRepeat() {
+            let backgroundRepeat;
+
+            if (this.isRepeatX && this.isRepeatY) {
+              backgroundRepeat = "repeat";
+            } else if (!this.isRepeatX && !this.isRepeatY) {
+              backgroundRepeat = "no-repeat";
+            } else {
+              if (this.isRepeatX) {
+                backgroundRepeat = "repeat-x";
+              }
+
+              if (this.isRepeatY) {
+                backgroundRepeat = "repeat-y";
+              }
+            }
+
+            return backgroundRepeat;
+          },
+          updateBackgroundPositionX(event) {
+            this.backgroundPositionX = event.target.value;
+          },
+          updateBackgroundPositionY(event) {
+            this.backgroundPositionY = event.target.value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

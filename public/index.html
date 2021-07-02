@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Handcrafted tools that might be of use."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Tools</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/common/favicon.png"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      a {
+        color: #6f6fff;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-col h-screen">
+      <main class="flex-grow">
+        <div class="container mx-auto py-8 text-gray-800">
+          <div class="flex flex-wrap items-center">
+            <div class="w-16 mr-6">
+              <img src="./images/common/tools.svg" alt="tools" />
+            </div>
+            <div class="flex-grow">
+              <h1 class="text-4xl font-semibold">Tools</h1>
+              <p class="text-xl font-medium">
+                Handcrafted tools that might be of use.
+              </p>
+            </div>
+          </div>
+          <hr class="my-8" />
+          <section class="max-w-lg mb-8">
+            <a class="block my-2 text-xl" href="./pattern-repeatable/"
+              >Pattern repeatable</a
+            >
+            <ul class="list-disc pl-4">
+              <li>To quickly test if patterns can be tiled seamlessly.</li>
+              <li>
+                To get a sense of the smallest possible dimension of a
+                repeatable pattern, yet maintaining the overall design look you
+                want.
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+      <footer class="flex-shrink-0 py-5">
+        <div class="container mx-auto">
+          <p>
+            <i>
+              Author ©
+              <a
+                href="http://simboonlong.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Sim Boon Long</a
+              >.</i
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

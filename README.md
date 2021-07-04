@@ -2,6 +2,10 @@
 
 Handcrafted tools that might be of use. List of [tools](https://tools.simboonlong.com).
 
+## Sprite animation
+
+Direct [link](https://tools.simboonlong.com/sprite-animation).
+
 ## Pattern repeatable
 
 Direct [link](https://tools.simboonlong.com/pattern-repeatable).

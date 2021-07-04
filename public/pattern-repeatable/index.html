@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <title>
+      Pattern repeatable - To quickly test if patterns can be tiled seamlessly
+    </title>
     <meta
       name="description"
       content="To quickly test if patterns can be tiled seamlessly."
@@ -11,7 +14,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Pattern repeatable</title>
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
@@ -40,7 +42,7 @@
           />
         </label>
         <label for="background-position-x">
-          <p>background-position-x (%)</p>
+          <p>background-position-x ({{ backgroundPositionX }}%)</p>
           <input
             id="background-position-x"
             type="range"
@@ -53,7 +55,7 @@
           />
         </label>
         <label for="background-position-y">
-          <p>background-position-y (%)</p>
+          <p>background-position-y ({{ backgroundPositionY }}%)</p>
           <input
             id="background-position-y"
             type="range"
@@ -66,7 +68,7 @@
           />
         </label>
         <label for="background-size-w">
-          <p>background-size (width in px)</p>
+          <p>background-size width (in px)</p>
           <input
             id="background-size-w"
             type="text"
@@ -76,7 +78,7 @@
           />
         </label>
         <label for="background-size-h">
-          <p>background-size (height in px)</p>
+          <p>background-size height (in px)</p>
           <input
             id="background-size-h"
             type="text"
@@ -94,7 +96,7 @@
           />
         </label>
       </div>
-      <div class="w-full h-full" :style="setBackground"></div>
+      <div class="w-full h-full" :style="getBackground"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="./main.js"></script>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Sprite animation - To quickly test out css animation with sprite sheet
+    </title>
+    <meta
+      name="description"
+      content="To quickly test out css animation with sprite sheet."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../css/controls.css" />
+    <style>
+      .frame {
+        outline: rgba(111, 111, 255, 0.4) 1px solid;
+      }
+
+      .sprite {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes sprite-x {
+        from {
+          background-position: 0% 0;
+        }
+        to {
+          background-position: 100% 0;
+        }
+      }
+
+      @keyframes sprite-y {
+        from {
+          background-position: 0 0%;
+        }
+        to {
+          background-position: 0 100%;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <div id="app" class="w-screen h-screen">
+      <div class="controls">
+        <label for="x">
+          <p>Background position X</p>
+          <input id="x" type="radio" name="xy" @input="updateIsY(false)" />
+        </label>
+        <label for="y">
+          <p>Background position Y</p>
+          <input
+            id="y"
+            type="radio"
+            name="xy"
+            checked
+            @input="updateIsY(true)"
+          />
+        </label>
+        <label for="aspect-ratio-w">
+          <p>Aspect ratio width</p>
+          <input
+            id="aspect-ratio-w"
+            type="number"
+            name="aspect-ratio-w"
+            min="1"
+            :value="aspectRatioW"
+            @input="updateAspectRatioW($event)"
+          />
+        </label>
+        <label for="aspect-ratio-h">
+          <p>Aspect ratio height</p>
+          <input
+            id="aspect-ratio-h"
+            type="number"
+            name="aspect-ratio-h"
+            min="1"
+            :value="aspectRatioH"
+            @input="updateAspectRatioH($event)"
+          />
+        </label>
+        <label for="animationDuration">
+          <p>Animation duration (in seconds)</p>
+          <input
+            id="animationDuration"
+            type="number"
+            step=".1"
+            name="animationDuration"
+            :value="animationDuration"
+            @input="updateAnimationDuration($event)"
+          />
+        </label>
+        <label for="step">
+          <p>Steps ({{ step }})</p>
+          <input
+            id="step"
+            type="range"
+            min="2"
+            step="1"
+            name="step"
+            :value="step"
+            @input="updateStep($event)"
+          />
+        </label>
+        <label for="file">
+          <input
+            id="file"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            @change="setBackgroundImage()"
+          />
+        </label>
+      </div>
+      <div class="container mx-auto py-8">
+        <div class="w-96 h-96 border">
+          <div class="frame relative" :style="getAspectRatio">
+            <div
+              class="sprite absolute top-0 left-0 w-full h-full"
+              :style="{...getBackground, ...getAnimation}"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

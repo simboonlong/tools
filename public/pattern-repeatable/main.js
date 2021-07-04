@@ -5,14 +5,14 @@ new Vue({
       isRepeatX: true,
       isRepeatY: true,
       backgroundImage: `url("./bg-tile.jpg")`,
-      backgroundPositionX: 0,
-      backgroundPositionY: 0,
+      backgroundPositionX: 50,
+      backgroundPositionY: 50,
       backgroundSizeW: "auto",
       backgroundSizeH: "auto",
     };
   },
   computed: {
-    setBackground() {
+    getBackground() {
       const backgroundSizeW = Number.isInteger(parseInt(this.backgroundSizeW))
         ? `${this.backgroundSizeW}px`
         : this.backgroundSizeW;

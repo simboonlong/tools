@@ -1,7 +1,7 @@
 new Vue({
   el: "#app",
   data: {
-    isSuccess: false,
+    isCopySuccess: false,
     rawHtml:
       '<div class="item"><p>text 1</p></div><div class="item"><p>text 2</p></div><div class="item"><p>text 3</p> </div>',
     selector: "",
@@ -60,23 +60,20 @@ new Vue({
     },
     copyJson() {
       const self = this;
-      const copy = document.createElement("input");
-      copy.setAttribute("id", "copy");
-      copy.value = JSON.stringify(this.json);
-      document.body.appendChild(copy);
-      document.getElementById("copy").select();
+      let copySuccessHandler;
 
-      try {
-        document.execCommand("copy");
-        this.isSuccess = true;
-        copy.remove();
-
-        setTimeout(() => {
-          self.isSuccess = false;
-        }, 2000);
-      } catch (e) {
-        console.log("Unable to copy", e);
-      }
+      navigator.clipboard
+        .writeText(JSON.stringify(this.json))
+        .then(() => {
+          self.isCopySuccess = true;
+          clearTimeout(copySuccessHandler);
+          copySuccessHandler = setTimeout(() => {
+            self.isCopySuccess = false;
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 });

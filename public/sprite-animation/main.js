@@ -1,8 +1,38 @@
+// keep to this weird indentation so copy is nice
+const getStyles = (name, duration, step) => {
+  return `.sprite {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: url("./images/sprite.png");
+  animation: ${name} ${duration}s steps(${step});
+}
+
+@keyframes sprite-x {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes sprite-y {
+  from {
+    background-position: 0 0%;
+  }
+  to {
+    background-position: 0 100%;
+  }
+}`;
+};
+
 new Vue({
   el: "#app",
   data() {
     return {
-      isY: true,
+      isCopySuccess: false,
+      animationName: "sprite-y",
       aspectRatioW: 1,
       aspectRatioH: 1,
       animationDuration: 0.5,
@@ -18,7 +48,7 @@ new Vue({
     },
     getAnimation() {
       return {
-        animationName: this.isY ? "sprite-y" : "sprite-x",
+        animationName: this.animationName,
         animationDuration: `${this.animationDuration}s`,
         animationTimingFunction: `steps(${this.step})`,
       };
@@ -34,8 +64,12 @@ new Vue({
   updated() {},
   mounted() {},
   methods: {
-    updateIsY(isY) {
-      this.isY = isY;
+    updateBackgroundPosition(isY) {
+      if (isY) {
+        this.animationName = "sprite-y";
+      } else {
+        this.animationName = "sprite-x";
+      }
     },
     updateAspectRatioW(event) {
       this.aspectRatioW = event.target.value;
@@ -60,6 +94,25 @@ new Vue({
       if (file) {
         reader.readAsDataURL(file);
       }
+    },
+    copyStyles() {
+      const self = this;
+      let copySuccessHandler;
+
+      navigator.clipboard
+        .writeText(
+          getStyles(this.animationName, this.animationDuration, this.step),
+        )
+        .then(() => {
+          self.isCopySuccess = true;
+          clearTimeout(copySuccessHandler);
+          copySuccessHandler = setTimeout(() => {
+            self.isCopySuccess = false;
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 });

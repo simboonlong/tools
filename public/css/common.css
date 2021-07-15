@@ -1,0 +1,28 @@
+button {
+  transition: background-color 0.2s ease-out;
+  background-color: rgb(52, 211, 153);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 4px 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+button:hover {
+  background-color: rgb(16, 185, 129);
+}
+
+button:active {
+  background-color: rgb(5, 150, 105);
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button[disabled]:hover {
+  background-color: #ccc !important;
+}

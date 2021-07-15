@@ -13,6 +13,7 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./../css/common.css" />
     <style>
       textarea,
       input {
@@ -86,32 +87,24 @@
                     placeholder="Set attribute name"
                     v-on:keyup="update"
                   />
-                  <button
-                    class="bg-yellow-200 p-2 rounded"
-                    v-if="index !== 0"
-                    v-on:click="removeField(index)"
-                  >
+                  <button v-if="index !== 0" v-on:click="removeField(index)">
                     -
                   </button>
                 </div>
               </div>
-              <button
-                v-on:click="addField"
-                class="bg-yellow-200 p-2 rounded block my-4"
-              >
-                +
-              </button>
+              <button v-on:click="addField">+</button>
             </div>
             <div class="w-full px-4 md:w-1/2">
               <pre class="bg-gray-200 p-2">{{ json }}</pre>
               <h6 class="text-sm my-2">{{ json.length }} items found.</h6>
               <button
                 v-on:click="copyJson"
-                class="bg-green-200 p-2 my-4 rounded"
+                type="button"
+                :disabled="isCopySuccess"
               >
-                Copy
+                <span v-if="isCopySuccess">Copied!</span>
+                <span v-else>Copy json</span>
               </button>
-              <p class="text-green-500" v-if="isSuccess">Copied success!</p>
             </div>
           </div>
         </div>

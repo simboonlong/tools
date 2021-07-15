@@ -19,6 +19,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./../css/controls.css" />
+    <link rel="stylesheet" href="./../css/common.css" />
     <style>
       .frame {
         outline: rgba(111, 111, 255, 0.4) 1px solid;
@@ -55,7 +56,12 @@
       <div class="controls">
         <label for="x">
           <p>Background position X</p>
-          <input id="x" type="radio" name="xy" @input="updateIsY(false)" />
+          <input
+            id="x"
+            type="radio"
+            name="xy"
+            @input="updateBackgroundPosition(false)"
+          />
         </label>
         <label for="y">
           <p>Background position Y</p>
@@ -64,7 +70,7 @@
             type="radio"
             name="xy"
             checked
-            @input="updateIsY(true)"
+            @input="updateBackgroundPosition(true)"
           />
         </label>
         <label for="aspect-ratio-w">
@@ -120,8 +126,12 @@
             @change="setBackgroundImage()"
           />
         </label>
+        <button v-on:click="copyStyles" type="button" :disabled="isCopySuccess">
+          <span v-if="isCopySuccess">Copied!</span>
+          <span v-else>Copy styles</span>
+        </button>
       </div>
-      <div class="container mx-auto py-8">
+      <div class="container mx-auto px-4 py-8">
         <div class="w-96 h-96 border">
           <div class="frame relative" :style="getAspectRatio">
             <div

@@ -25,14 +25,14 @@
   <body class="text-gray-800">
     <div id="app" class="w-screen h-screen">
       <div class="controls">
-        <label for="prefix">
-          <p>prefix class name</p>
+        <label for="isClassName">
+          <p>Filename = CSS class</p>
           <input
-            id="prefix"
-            type="text"
-            placeholder="prefix"
-            name="prefix"
-            v-model="prefix"
+            id="isClassName"
+            type="checkbox"
+            placeholder="isClassName"
+            name="isClassName"
+            v-model="isClassName"
           />
         </label>
         <label for="file">
@@ -41,6 +41,7 @@
             type="file"
             accept="image/svg+xml"
             @change="setSvg()"
+            @click="clearFile()"
           />
         </label>
         <button v-on:click="copySvg" type="button" :disabled="isCopySuccess">
@@ -50,26 +51,24 @@
       </div>
       <div class="container mx-auto px-4 py-8">
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-1/3 mb-4">
-            <h4 class="text-xl mb-2">Before</h4>
-            <div class="border p-2">
+          <div class="w-full lg:w-1/3 mb-16 lg:mr-4">
+            <div class="border p-2 mb-4">
               <pre class="text-xs break-words whitespace-pre-wrap">
 {{ svg }}</pre
               >
             </div>
-          </div>
-          <div class="w-full lg:w-1/3 mb-4">
-            <h4 class="text-xl mb-2">After</h4>
-            <div class="border p-2">
-              <pre class="text-xs break-words whitespace-pre-wrap">
-{{ optimizedSvgStr }}</pre
-              >
+            <div class="border">
+              <div class="max-w-full" v-html="svg"></div>
             </div>
           </div>
-          <div class="w-full lg:w-1/3 mb-4">
-            <h4 class="text-xl mb-2">SVG</h4>
-            <div class="border p-2">
-              <div class="max-w-full" v-html="optimizedSvgStr"></div>
+          <div class="w-full lg:w-1/3 mb-16">
+            <div class="border p-2 mb-4">
+              <pre class="text-xs break-words whitespace-pre-wrap">
+{{ getOptimizedSvgStr }}</pre
+              >
+            </div>
+            <div class="border">
+              <div class="max-w-full" v-html="getOptimizedSvgStr"></div>
             </div>
           </div>
         </div>

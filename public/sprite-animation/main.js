@@ -64,6 +64,9 @@ new Vue({
   updated() {},
   mounted() {},
   methods: {
+    clearFile() {
+      document.getElementById("file").value = "";
+    },
     updateBackgroundPosition(isY) {
       if (isY) {
         this.animationName = "sprite-y";

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Strip SVG - To strip off redundant and useless information of svg files
+    </title>
+    <meta
+      name="description"
+      content="To strip off redundant and useless information of svg files."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../css/controls.css" />
+    <link rel="stylesheet" href="./../css/common.css" />
+    <style></style>
+  </head>
+  <body class="text-gray-800">
+    <div id="app" class="w-screen h-screen">
+      <div class="controls">
+        <label for="isClassName">
+          <p>Filename = CSS class</p>
+          <input
+            id="isClassName"
+            type="checkbox"
+            placeholder="isClassName"
+            name="isClassName"
+            v-model="isClassName"
+          />
+        </label>
+        <label for="file">
+          <input
+            id="file"
+            type="file"
+            accept="image/svg+xml"
+            @change="setSvg()"
+            @click="clearFile()"
+          />
+        </label>
+        <button v-on:click="copySvg" type="button" :disabled="isCopySuccess">
+          <span v-if="isCopySuccess">Copied!</span>
+          <span v-else>Copy SVG</span>
+        </button>
+      </div>
+      <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-1/3 mb-16 lg:mr-4">
+            <div class="border p-2 mb-4">
+              <pre class="text-xs break-words whitespace-pre-wrap">
+{{ svg }}</pre
+              >
+            </div>
+            <div class="border">
+              <div class="max-w-full" v-html="svg"></div>
+            </div>
+          </div>
+          <div class="w-full lg:w-1/3 mb-16">
+            <div class="border p-2 mb-4">
+              <pre class="text-xs break-words whitespace-pre-wrap">
+{{ getOptimizedSvgStr }}</pre
+              >
+            </div>
+            <div class="border">
+              <div class="max-w-full" v-html="getOptimizedSvgStr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>

@@ -34,6 +34,9 @@ new Vue({
   updated() {},
   mounted() {},
   methods: {
+    clearFile() {
+      document.getElementById("file").value = "";
+    },
     setBackgroundImage() {
       const file = document.getElementById("file").files[0];
       const reader = new FileReader();

@@ -124,6 +124,7 @@
             type="file"
             accept="image/png, image/jpeg, image/jpg"
             @change="setBackgroundImage()"
+            @click="clearFile()"
           />
         </label>
         <button v-on:click="copyStyles" type="button" :disabled="isCopySuccess">

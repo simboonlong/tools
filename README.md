@@ -6,6 +6,10 @@ Handcrafted tools that might be of use. List of [tools](https://tools.simboonlon
 
 Direct [link](https://tools.simboonlong.com/sprite-animation).
 
+## Strip SVG
+
+Direct [link](https://tools.simboonlong.com/strip-svg).
+
 ## Pattern repeatable
 
 Direct [link](https://tools.simboonlong.com/pattern-repeatable).

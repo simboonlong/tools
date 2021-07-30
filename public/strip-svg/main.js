@@ -48,6 +48,10 @@ new Vue({
           },
           "convertStyleToAttrs",
           "removeDimensions",
+          {
+            name: "convertShapeToPath",
+            active: false,
+          },
         ]),
       };
 

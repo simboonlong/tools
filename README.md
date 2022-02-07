@@ -4,22 +4,29 @@ Handcrafted tools that might be of use. List of [tools](https://tools.simboonlon
 
 ## Sprite animation
 
+- To quickly test out css animation with uploaded sprite sheet.
+
 Direct [link](https://tools.simboonlong.com/sprite-animation).
 
 ## Strip SVG
+
+- To strip off redundant information and standardise responsive output of svg files.
 
 Direct [link](https://tools.simboonlong.com/strip-svg).
 
 ## Pattern repeatable
 
-Direct [link](https://tools.simboonlong.com/pattern-repeatable).
+- To quickly test if patterns can be tiled seamlessly
+- To get a sense of the smallest possible dimension of a repeatable pattern, yet maintaining the overall design look you
+  want.
 
-![pattern-repeatable](public/images/demos/pattern-repeatable.gif)
+Direct [link](https://tools.simboonlong.com/pattern-repeatable).
 
 ## Scrape html
 
+- Manually scrape html into json data.
+- Format json fields on the fly.
+
 Direct [link](https://tools.simboonlong.com/scrape-html).
 
-![scrape-html](public/images/demos/scrape-html.gif)
-
-Author © [Sim Boon Long](http://simboonlong.com).
+Author © [Sim Boon Long](https://simboonlong.com).

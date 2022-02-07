@@ -26,3 +26,11 @@ button[disabled] {
 button[disabled]:hover {
   background-color: #ccc !important;
 }
+
+a {
+  color: #6f6fff;
+}
+
+a:hover {
+  text-decoration: underline;
+}

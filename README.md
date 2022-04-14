@@ -2,6 +2,12 @@
 
 Handcrafted tools that might be of use. List of [tools](https://tools.simboonlong.com).
 
+## Optical character recognition
+
+- To copy paste off text from uploaded image.
+
+Direct [link](https://tools.simboonlong.com/optical-character-recognition).
+
 ## Sprite animation
 
 - To quickly test out css animation with uploaded sprite sheet.

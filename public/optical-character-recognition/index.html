@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Optical character recognition - To copy paste off text from uploaded image
+    </title>
+    <meta
+      name="description"
+      content="To copy paste off text from uploaded image."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../css/controls.css" />
+    <link rel="stylesheet" href="./../css/common.css" />
+  </head>
+  <body class="text-gray-800">
+    <div class="px-4 py-8">
+      <section id="app">
+        <div class="controls">
+          <label for="file">
+            <input
+              id="file"
+              type="file"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              @change="loadImage()"
+              @click="clearFile()"
+            />
+          </label>
+          <button
+            v-on:click="copyText"
+            type="button"
+            :disabled="isCopySuccess || !isOcr"
+          >
+            <span v-if="isCopySuccess">Copied!</span>
+            <span v-else>Copy text</span>
+          </button>
+        </div>
+        <div class="container mx-auto px-4 py-8">
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-1/3 mb-16 lg:mr-4">
+              <div class="border p-2 mb-4">
+                <img :src="base64" alt="" />
+              </div>
+            </div>
+            <div class="w-full lg:w-1/3 mb-16">
+              <div class="relative border p-2 mb-4">
+                <template v-if="status === 'recognizing text'">
+                  <div
+                    class="absolute top-0 left-0 transition-all duration-200 ease-out h-2"
+                    :style="{ backgroundColor: '#6f6fff', width: (progress * 100).toFixed(0) + '%' }"
+                  ></div>
+                  <div class="h-2"></div>
+                  <template v-if="progress < 1">
+                    <h3 class="text-xs uppercase font-bold">{{ status }}:</h3>
+                    <p class="text-xs">{{ progress.toFixed(2) }}</p>
+                  </template>
+                </template>
+                <template v-if="isOcr">
+                  <pre class="text-xs break-words whitespace-pre-wrap">
+{{ text }}
+                </pre
+                  >
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="fixed bottom-0 right-0 mr-8 mb-8">
+      <a href="../">&larr; Back</a>
+    </div>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

@@ -10,7 +10,7 @@ Direct [link](https://tools.simboonlong.com/sprite-animation).
 
 ## Strip SVG
 
-- To strip off redundant information and standardise responsive output of svg files.
+- To strip off redundant information and standardise responsive output of SVG files.
 
 Direct [link](https://tools.simboonlong.com/strip-svg).
 
@@ -22,9 +22,9 @@ Direct [link](https://tools.simboonlong.com/strip-svg).
 
 Direct [link](https://tools.simboonlong.com/pattern-repeatable).
 
-## Scrape html
+## Scrape HTML
 
-- Manually scrape html into json data.
+- Manually scrape HTML into json data.
 - Format json fields on the fly.
 
 Direct [link](https://tools.simboonlong.com/scrape-html).

@@ -1,18 +1,22 @@
-const initialState = {
-  isCopySuccess: false,
-  base64: "",
-  text: "",
-  status: "",
-  progress: 0,
-  worker: null,
+const API_ENDPOINT =
+  "https://api.simboonlong.com/.netlify/functions/remote-image";
+
+const initialState = () => {
+  return {
+    isCopySuccess: false,
+    imageUrl: "",
+    base64: "",
+    text: "",
+    status: "",
+    progress: 0,
+    worker: null,
+  };
 };
 
 new Vue({
   el: "#app",
   data() {
-    return {
-      ...initialState,
-    };
+    return initialState();
   },
   methods: {
     ocr: async (vueRef, image) => {
@@ -33,35 +37,53 @@ new Vue({
       } = await self.worker.recognize(image);
       self.text = text;
     },
-    clearData() {
+    resetData() {
+      Object.assign(this.$data, initialState());
+    },
+    cancel() {
       if (this.worker) this.worker.terminate();
-      this.data = {
-        ...this.data,
-        ...initialState,
-      };
+      this.resetData();
+    },
+    clearImageUrl() {
+      this.imageUrl = "";
     },
     clearFile() {
       document.getElementById("file").value = "";
     },
-    setText(file) {
-      this.ocr(this, URL.createObjectURL(file));
-    },
-    setImage(file) {
-      const reader = new FileReader();
+    loadImageUrl() {
+      this.clearFile();
 
+      const self = this;
+      axios
+        .get(`${API_ENDPOINT}/${self.imageUrl}`)
+        .then((response) => {
+          const { mimeType, data } = response.data;
+          const image = new Image();
+          const base64 = `data:${mimeType};base64,${data}`;
+          image.src = base64;
+          image.onload = () => {
+            self.ocr(self, image);
+          };
+
+          self.base64 = base64;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    loadFile() {
+      this.clearImageUrl();
+
+      const file = document.getElementById("file").files[0];
+      const reader = new FileReader();
       reader.onloadend = (e) => {
         this.base64 = reader.result;
       };
-
       if (file) {
         reader.readAsDataURL(file);
       }
-    },
-    loadImage() {
-      const file = document.getElementById("file").files[0];
-      this.clearData();
-      this.setImage(file);
-      this.setText(file);
+
+      this.ocr(this, URL.createObjectURL(file)); // https://github.com/naptha/tesseract.js/blob/master/docs/image-format.md
     },
     copyText() {
       const self = this;
@@ -82,8 +104,11 @@ new Vue({
     },
   },
   computed: {
-    isOcr() {
+    isOcred() {
       return this.status === "recognizing text" && this.progress === 1;
+    },
+    isOcring() {
+      return this.status === "recognizing text" && this.progress < 1;
     },
   },
 });

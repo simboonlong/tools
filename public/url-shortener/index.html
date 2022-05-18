@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      URL shortener - Proof of concept for a basic URL shortener service
+    </title>
+    <meta
+      name="description"
+      content="Proof of concept for a basic URL shortener service."
+    />
+    <meta name="author" content="Sim Boon Long" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../css/common.css" />
+    <style>
+      textarea,
+      input {
+        border: solid 1px #ccc;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <div class="px-4 py-8">
+      <section id="app">
+        <div class="container mx-auto">
+          <div v-if="isShow">
+            <div class="flex flex-wrap -mx-4">
+              <div class="w-full px-4 md:w-1/2">
+                <input
+                  class="resize-none w-full mb-4"
+                  v-model="urlLong"
+                  placeholder="Paste long URL here"
+                  :disabled="statusGenerate !== 'initial'"
+                />
+                <button
+                  v-on:click="generateShortUrl"
+                  type="button"
+                  :disabled="statusGenerate !== 'initial'"
+                >
+                  <span v-if="statusGenerate === 'pending'">Generating...</span>
+                  <span v-else>Generate short URL</span>
+                </button>
+                <button
+                  v-on:click="copyShortUrl"
+                  type="button"
+                  :disabled="statusGenerate !== 'done'"
+                >
+                  <span v-if="isCopySuccess">Copied!</span>
+                  <span v-else>Copy short URL</span>
+                </button>
+                <p v-if="urlShort !== ''" class="my-4">
+                  Your shortened url is
+                  <a :href="urlShort" target="_blank" rel="noopener noreferrer"
+                    >{{ urlShort }}</a
+                  >
+                </p>
+                <p v-if="errorMessage" class="text-red-500 my-4">
+                  {{ errorMessage }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div v-else>Loading...</div>
+        </div>
+      </section>
+    </div>
+    <div class="fixed bottom-0 right-0 mr-8 mb-8">
+      <a href="../">&larr; Back</a>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

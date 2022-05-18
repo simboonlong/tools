@@ -1,5 +1,7 @@
 const API_ENDPOINT =
-  "https://api.simboonlong.com/.netlify/functions/remote-image";
+  location.hostname === "tools.simboonlong.com"
+    ? "https://api.simboonlong.com/.netlify/functions/remote-image"
+    : "http://localhost:9999/.netlify/functions/remote-image";
 
 const initialState = () => {
   return {

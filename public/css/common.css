@@ -18,13 +18,17 @@ button:active {
   background-color: rgb(5, 150, 105);
 }
 
+input[disabled],
 button[disabled] {
   background-color: #ccc;
+  color: #f3f3f3;
   cursor: not-allowed;
 }
 
+input[disabled]:hover,
 button[disabled]:hover {
   background-color: #ccc !important;
+  color: #f3f3f3 !important;
 }
 
 a {

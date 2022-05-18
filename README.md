@@ -35,4 +35,10 @@ Direct [link](https://tools.simboonlong.com/pattern-repeatable).
 
 Direct [link](https://tools.simboonlong.com/scrape-html).
 
+## URL shortener
+
+- Proof of concept for a basic URL shortener service.
+
+Direct [link](https://tools.simboonlong.com/url-shortener).
+
 Author © [Sim Boon Long](https://simboonlong.com).

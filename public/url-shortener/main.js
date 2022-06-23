@@ -60,9 +60,6 @@ new Vue({
         axios({
           method: "POST",
           url: API_ENDPOINT,
-          headers: {
-            "content-type": "application/x-www-form-urlencoded",
-          },
           data: {
             urlOriginal: this.urlLong,
           },
@@ -73,7 +70,7 @@ new Vue({
             self.statusGenerate = "done";
           })
           .catch((error) => {
-            console.error(error);
+            self.errorMessage = error.response.data;
             this.statusGenerate = "initial";
           });
       } else {
